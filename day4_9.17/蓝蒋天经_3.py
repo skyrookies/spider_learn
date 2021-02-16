@@ -1,0 +1,9 @@
+x=int(input("请输入您要阶乘的整数:"))
+out=1
+if(x==0):
+    print("0的结成为0")
+else:
+    while(x!=0):
+        out=out*x
+        x=x-1
+    print("该数字的阶乘为{0}".format(out))
