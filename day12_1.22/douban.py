@@ -118,20 +118,51 @@ def savedatetoexcel(datalist,savepath):
         for j in range(0, 7):
             sheet.write(i + 1, j, data[j])  # 数据
     workbook.save(savepath)
-def savedatetodb():
-    conn = sqlite3.connect("test.db")
-    print("成功建立连接")
-    c = conn.cursor()
-    sqlin = '''
-        insert into company(id,name,age,address,salary)
-            values(2,"jiang",23,"here",40000)
+def savedatetodb(datalist,dbpath):
+    init_db(dbpath)
+    conn = sqlite3.connect(dbpath)
+    cur = conn.cursor()
 
-    '''
+    for data in datalist:
+        for index in range(len(data)):
+            if index == 4 or index == 5:
+                continue
+            data[index] = '"' + data[index] + '"'
+        sql = '''
+                    insert into movie250 (
+                    info_link,pic_link,cname,ename,score,rated,instroduction,info) 
+                    values(%s)''' % ",".join(data)
+        print(sql)
+        cur.execute(sql)
+        conn.commit()
+    cur.close()
+    conn.close()
+    print("插入db成功")
 
-    c.execute(sqlin)
+
+def init_db(dbpath):
+    sql = '''
+        create table movie250 
+        (
+        id integer primary key autoincrement,
+        info_link text,
+        pic_link text,
+        cname varchar,
+        ename varchar,
+        score numeric ,
+        rated numeric ,
+        instroduction text,
+        info text
+        )
+
+    '''  # 创建数据表
+    conn = sqlite3.connect(dbpath)
+    cursor = conn.cursor()
+    cursor.execute(sql)
     conn.commit()
     conn.close()
-    print("插入成功")
+    print("建立db成功")
+
 if __name__=="__main__":
     # 主函数入口
     sys.stdout =io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')

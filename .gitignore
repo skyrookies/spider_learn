@@ -1,5 +1,14 @@
 *.pdf
 *.rar
+#不忽视python文件
+!*.py
+#忽视文件夹内pycharm配置文件夹
 /day*/.idea/
+#不忽视文件夹
 !/day*/
+#不忽略python文件
+!/day*/*.py
+#忽略其余任意文件。
+/day*/*
+#忽略其他文件夹
 /*/
