@@ -1,0 +1,5 @@
+*.pdf
+*.rar
+/day*/.idea/
+!/day*/
+/*/
