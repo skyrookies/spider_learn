@@ -137,7 +137,6 @@ def savedatetodb(datalist,dbpath):
         conn.commit()
     cur.close()
     conn.close()
-    print("插入db成功")
 
 
 def init_db(dbpath):
@@ -161,8 +160,7 @@ def init_db(dbpath):
     cursor.execute(sql)
     conn.commit()
     conn.close()
-    print("建立db成功")
-
+    print("建立数据库成功")
 if __name__=="__main__":
     # 主函数入口
     sys.stdout =io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
